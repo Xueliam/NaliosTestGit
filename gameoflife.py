@@ -26,4 +26,21 @@ def GameOfLife(board):
 def PlayGameOfLife(board):
     for _ in range(5):
         board = GameOfLife(board)
+    # Print the board as ugly HTML
+    print('<table border="1">')
+    for row in board:
+        print('<tr>' + ''.join(f'<td>{cell}</td>' for cell in row) + '</tr>')
+    print('</table>')
     return board
+
+
+#généré par copilot
+board = [
+    [0, 1, 0, 0, 1],
+    [1, 0, 1, 0, 0],
+    [0, 1, 1, 1, 0],
+    [0, 0, 0, 1, 0],
+    [1, 0, 0, 0, 1]
+]
+
+PlayGameOfLife(board)
