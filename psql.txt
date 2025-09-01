@@ -1,0 +1,27 @@
+
+CREATE TABLE Category
+    id_Category INT PRIMARY KEY,
+    name varchar(50) NOT NULL,
+    private boolean DEFAUlT TRUE;
+
+CREATE TABLE Product
+    id_Product INT PRIMARY KEY,
+    name varchar(50) NOT NULL,
+    price FLOAT NOT NULL,
+    date DATE NOT NULL;
+    
+
+CREATE TABLE ProductCategory
+    id_Product INT NOT NULL,
+    id_Category INT NOT NULL,
+    PRIMARY KEY(id_Category , id_Product),
+    FOREIGN KEY(id_Product) REFERENCES Product.id_Product,
+    FOREIGN KEY(id_Category) REFERENCES Category.id_Category;
+
+
+SELECT p.* FROM Product p,
+JOIN ProductCategory pc on p.id_Product = pc.id_Product
+JOIN Category c ON pc.id_Category = c.id_Category
+WHERE c.private = FALSE
+GROUP BY p.id_Product
+HAVING COUNT(DISTINCT c.id_Category) > 5;
